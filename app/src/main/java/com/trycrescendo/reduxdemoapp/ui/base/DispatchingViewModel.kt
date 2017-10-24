@@ -54,7 +54,7 @@ abstract class DispatchingViewModel<DataType, R: BaseAction>(protected var inter
                 try {
                     schedulers.io().scheduleDirect { it.accept(action) }
                 } catch (e: Exception) {
-                    Timber.e(e)
+                    Timber.e(e) // Each consumer manually handles errors
                 }
             }
         }

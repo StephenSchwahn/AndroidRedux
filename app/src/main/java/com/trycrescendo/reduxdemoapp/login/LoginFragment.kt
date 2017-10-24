@@ -44,7 +44,6 @@ class LoginFragment: DataBindingFragment<FragmentLoginBinding>(R.layout.fragment
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.init()
         compositeDisposable.add(viewModel.uiModel.subscribe { model ->
             model?.let {
 //                binding.uiState = model.data
@@ -57,13 +56,6 @@ class LoginFragment: DataBindingFragment<FragmentLoginBinding>(R.layout.fragment
     }
 
     private fun subscribe() {
-
-//        val changeText = RxTextView.afterTextChangeEvents(binding.email)
-//                .skipInitialValue()
-//                .throttleLast(100, TimeUnit.MILLISECONDS)
-//                .debounce(200, TimeUnit.MILLISECONDS)
-//                .map { event -> AccessRequestAction.ValidatePhoneNumberAction(event.editable().toString()) }
-
 
         val signInButton = RxView.clicks(binding.emailSignInButton!!)
                 .throttleLast(100, TimeUnit.MILLISECONDS)
@@ -97,13 +89,10 @@ class LoginFragment: DataBindingFragment<FragmentLoginBinding>(R.layout.fragment
             }
 
             if (State.SUCCESS == m.state) {
-
                 m.data?.let { d ->
                     Toast.makeText(context, m.data.email, Toast.LENGTH_LONG).show()
                 }
             }
-
         }
-
     }
 }

@@ -36,7 +36,6 @@ class LoginActivity : BaseActivity(), Navigator {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        authViewModel.init()
         authViewModel.uiModel.subscribe { creds ->
             Timber.e("NEW Credentials: $creds")
 

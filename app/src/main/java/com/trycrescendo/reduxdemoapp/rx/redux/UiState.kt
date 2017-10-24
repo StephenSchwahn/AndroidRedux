@@ -31,5 +31,4 @@ class UiState<T> constructor(val state: State, val data: T?, val error: Throwabl
             return UiState(State.ERROR, null, error)
         }
     }
-
 }

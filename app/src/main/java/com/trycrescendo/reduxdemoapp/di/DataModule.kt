@@ -2,7 +2,9 @@ package com.trycrescendo.reduxdemoapp.di
 
 import android.content.SharedPreferences
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
+import com.trycrescendo.reduxdemoapp.data.AppCredentialsRepository
 import com.trycrescendo.reduxdemoapp.data.AppDatabase
+import com.trycrescendo.reduxdemoapp.data.CredentialsRepository
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -26,5 +28,9 @@ class DataModule {
     @Singleton
     @Provides
     fun provideCredentialStorage(appDatabase: AppDatabase) = appDatabase.credentialsDao()
+
+    @Singleton
+    @Provides
+    fun provideCredentialsRepo(appDatabase: AppDatabase): CredentialsRepository = AppCredentialsRepository(appDatabase)
 
 }

@@ -6,6 +6,7 @@ import com.trycrescendo.reduxdemoapp.rx.redux.Dispatcher
 import com.trycrescendo.reduxdemoapp.rx.redux.UiActionInteractor
 import dagger.Provides
 import io.reactivex.Flowable
+import io.reactivex.Single
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.functions.Consumer
@@ -21,7 +22,6 @@ class LoginInteractor(private val dispatcher: Dispatcher<LoginActions>,
                       private val schedulersProvider: SchedulersProvider): UiActionInteractor<LoginActions>(){
 
     val disposeBag = CompositeDisposable()
-
 
     override val actionMapper: Consumer<LoginActions> = Consumer { action ->
         when (action) {
@@ -39,9 +39,7 @@ class LoginInteractor(private val dispatcher: Dispatcher<LoginActions>,
                     dispatcher.dispatch(Flowable.just(LoginActions.LoginActionSuccess(
                             credentials.accessToken!!, credentials.email!!, credentials.pass!!)))
                 }, { err ->
-                    dispatcher.dispatch(Flowable.just(LoginActions.LoginActionFailure(
-                            err, email, pass
-                    )))
+                    dispatcher.dispatch(Flowable.just(LoginActions.LoginActionFailure(err, email, pass)))
                 })
         )
     }

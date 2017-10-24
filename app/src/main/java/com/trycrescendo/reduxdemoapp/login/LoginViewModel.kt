@@ -26,6 +26,7 @@ class LoginViewModel @Inject constructor(schedulers: SchedulersProvider,
         val list = arrayListOf<UiActionInteractor<LoginActions>>(LoginInteractor(this, credentialsRepository, schedulersProvider))
         list.addAll(super.interactors)
         super.interactors = list
+        init()
     }
 
     inner class LoginStateAccumlator: StateAccumulator<LoginActions, LoginUiModel>(LoginUiModel.default()) {

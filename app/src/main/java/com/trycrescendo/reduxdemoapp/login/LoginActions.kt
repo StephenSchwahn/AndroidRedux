@@ -5,14 +5,14 @@ import com.trycrescendo.reduxdemoapp.ui.navigation.NavigationAction
 
 sealed class LoginActions: BaseAction() {
 
-    open class Noop: LoginActions()
+    class Noop: LoginActions()
 
-    class LoginAction(val email: String, val pass: String): LoginActions()
-    class LoginActionSuccess(val authToken: String, val email: String, val pass: String): LoginActions()
-    class LoginActionFailure(val err: Throwable, val email: String, val pass: String): LoginActions()
-    class RegisterAction(val email: String, val pass: String): LoginActions()
-    class RegisterActionSuccess(val email: String, val pass: String): LoginActions()
-    class RegisterActionFailure(val err: Throwable, val email: String, val pass: String): LoginActions()
+    data class LoginAction(val email: String, val pass: String): LoginActions()
+    data class LoginActionSuccess(val authToken: String, val email: String, val pass: String): LoginActions()
+    data class LoginActionFailure(val err: Throwable, val email: String, val pass: String): LoginActions()
+    data class RegisterAction(val email: String, val pass: String): LoginActions()
+    data class RegisterActionSuccess(val email: String, val pass: String): LoginActions()
+    data class RegisterActionFailure(val err: Throwable, val email: String, val pass: String): LoginActions()
 
-    open class MoveToHomeAction: LoginActions(), NavigationAction
+    class MoveToHomeAction: LoginActions(), NavigationAction
 }
