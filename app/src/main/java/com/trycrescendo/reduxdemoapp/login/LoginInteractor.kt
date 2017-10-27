@@ -46,6 +46,7 @@ class LoginInteractor(private val dispatcher: Dispatcher<LoginActions>,
 
     private fun tryCreateAccount(email: String, pass: String) {
         disposeBag.add(credentialsRepository.saveCredentials(email, pass)
+                .observeOn(schedulersProvider.io())
                 .subscribe( {
                     dispatcher.dispatch(Flowable.just(LoginActions.RegisterActionSuccess(email, pass)))
                 }, { err ->
